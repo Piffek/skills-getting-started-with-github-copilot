@@ -45,9 +45,12 @@ def test_signup_adds_new_participant(client):
     # Arrange
     activity_name = "Chess Club"
     email = "new.student@mergington.edu"
+    from urllib.parse import quote
 
-    # Act
-    response = client.post(f"/activities/{activity_name}/signup", params={"email": email})
+    response = client.post(
+        f"/activities/{quote(activity_name)}/signup",
+        params={"email": email},
+    )
 
     # Assert
     assert response.status_code == 200
